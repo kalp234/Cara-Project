@@ -1,64 +1,157 @@
-const express = require('express');
+const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
-const Cart = require('../models/cart.model'); // Assuming you have a Cart model for MongoDB
-const User = require('../models/userModel'); // Assuming you have a User model for MongoDB
-const Product = require('../models/productModel'); // Assuming you have a Product model for MongoDB
+const Cart = require("../models/cart.model");
+const User = require("../models/userModel");
+const Product = require("../models/productModel");
 
-// POST request to add product to cart
-router.post('/cart/add', async (req, res) => {
+// POST: Add to cart
+router.post("/add", async (req, res) => {
+  try {
+    let { userId, productId, quantity } = req.body;
+
+    if (!userId || !productId || !quantity) {
+      return res.status(400).json({
+        message: "Missing required fields: userId, productId, or quantity",
+      });
+    }
+
+    if (quantity <= 0 || isNaN(quantity)) {
+      return res
+        .status(400)
+        .json({ message: "Quantity must be a positive number" });
+    }
+
+    const userObjectId = new mongoose.Types.ObjectId(userId);
+    const productObjectId = new mongoose.Types.ObjectId(productId);
+
+    const user = await User.findById(userObjectId);
+    const product = await Product.findById(productObjectId);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    let cart = await Cart.findOne({ userId: userObjectId });
+
+    if (!cart) {
+      cart = new Cart({
+        userId: userObjectId,
+        items: [{ productId: productObjectId, quantity }],
+      });
+    } else {
+      const existingItemIndex = cart.items.findIndex(
+        (item) => item.productId.toString() === productObjectId.toString()
+      );
+
+      if (existingItemIndex > -1) {
+        cart.items[existingItemIndex].quantity += quantity;
+      } else {
+        cart.items.push({ productId: productObjectId, quantity });
+      }
+    }
+
+    await cart.save();
+    res.status(200).json({ message: "Item added to cart" });
+  } catch (error) {
+    console.error("Error adding to cart:", error.message);
+    res
+      .status(500)
+      .json({ message: "Failed to add to cart", error: error.message });
+  }
+});
+
+
+// GET: Fetch cart by userId
+router.get("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    console.log("userId:", userId);
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid userId" });
+    }
+
+    let cart = await Cart.findOne({ userId }).populate("items.productId");
+
+    if (!cart) {
+      cart = new Cart({
+        userId,
+        items: [],
+      });
+      await cart.save();
+    }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    console.error("Error fetching cart:", error.message);
+    res.status(500).json({
+      message: "Failed to fetch or create cart",
+      error: error.message,
+    });
+  }
+});
+
+// POST: Remove item from cart
+router.post("/remove", async (req, res) => {
+  const { userId, productId } = req.body;
+
+  try {
+    const cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+
+    cart.items = cart.items.filter(
+      (item) => item.productId.toString() !== productId
+    );
+
+    await cart.save();
+
+    res.status(200).json({ message: "Item removed from cart" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to remove item", error: error.message });
+  }
+});
+
+// POST: Update item quantity in cart
+router.post("/update", async (req, res) => {
   const { userId, productId, quantity } = req.body;
 
   try {
-    // Check for missing fields
-    if (!userId || !productId || !quantity) {
-      return res.status(400).json({ message: 'Missing required fields: userId, productId, or quantity' });
+    if (!userId || !productId || quantity === undefined) {
+      return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Validate quantity (ensure it's a positive number)
     if (quantity <= 0 || isNaN(quantity)) {
-      return res.status(400).json({ message: 'Quantity must be a positive number' });
+      return res
+        .status(400)
+        .json({ message: "Quantity must be a positive number" });
     }
 
-    // Validate if user and product exist
-    const user = await User.findById(userId);
-    const product = await Product.findById(productId);
-    console.log(user, product);
+    const cart = await Cart.findOne({ userId });
 
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found" });
     }
 
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
+    const itemIndex = cart.items.findIndex(
+      (item) => item.productId.toString() === productId
+    );
+
+    if (itemIndex === -1) {
+      return res.status(404).json({ message: "Cart item not found" });
     }
 
-    // Check if the product already exists in the cart
-    let cartItem = await Cart.findOne({ userId, productId });
+    cart.items[itemIndex].quantity = quantity;
+    await cart.save();
 
-    if (cartItem) {
-      // If the product is already in the cart, update the quantity
-      cartItem.quantity += quantity; // You can change this logic to meet your requirements
-      await cartItem.save();
-      return res.status(200).json({ message: 'Cart item updated' });
-    }
-
-    // If product doesn't exist in cart, create a new cart item
-    cartItem = new Cart({
-      userId,
-      productId,
-      quantity,
-    });
-
-    await cartItem.save();
-
-    res.status(200).json({ message: 'Item added to cart' });
+    res.status(200).json({ message: "Cart updated successfully" });
   } catch (error) {
-    // Log the error and send a response
-    console.error('Error adding to cart:', error.message);
-    res.status(500).json({
-      message: 'Failed to add to cart',
-      error: error.message,
-    });
+    res
+      .status(500)
+      .json({ message: "Failed to update cart", error: error.message });
   }
 });
 
