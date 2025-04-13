@@ -1,3 +1,0 @@
-cara/node_modules/
-cara-backend/node_modules/
-
