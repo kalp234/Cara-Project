@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { CartContext } from "../api/CartContext"; // Assuming CartContext provides total
+import { CartContext } from "../api/CartContext";
 
 const Cartadd = () => {
   const { total } = useContext(CartContext);
@@ -11,19 +11,22 @@ const Cartadd = () => {
 
   const handleCheckout = () => {
     const options = {
-      key: "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay Key ID
-      amount: grandTotal * 100, // amount in paise
+      key: "rzp_test_z7oGYiesyg5x3b",
+      amount: grandTotal * 100, 
       currency: "INR",
       name: "Cara Fashion",
       description: "Purchase from Cara",
       image: "/logo.png",
       handler: function (response) {
-        alert(`Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`);
+        alert(`✅ Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`);
       },
       prefill: {
         name: "Kalp Shah",
         email: "example@gmail.com",
         contact: "9999999999"
+      },
+      notes: {
+        address: "Cara Fashion Online"
       },
       theme: {
         color: "#3399cc"

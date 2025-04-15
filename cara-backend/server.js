@@ -2,17 +2,17 @@ const PORT = 2345;
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const paymentRoutes = require("./routes/payment");
 
 const userModel = require("./models/userModel");
 require("dotenv").config();
 
 const cartRoutes = require("./routes/cart.routes");
-const mongourl = `mongodb+srv://kkalp234:TMGkMCPuJfzp8Gnc@caradb.xyz00wx.mongodb.net/?retryWrites=true&w=majority&appName=CaraDB`;
 const mongourl2 = "mongodb://localhost:27017/caraDB";
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+app.use("/api/payment", paymentRoutes);
 mongoose
   .connect(mongourl2)
   .then(() => console.log("MongoDB Connected"))
