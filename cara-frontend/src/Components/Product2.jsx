@@ -396,7 +396,7 @@ const userId = user?._id; // actual MongoDB ObjectId
 const Product2 = () => {
   const handleAddToCart = async (productId) => {
     try {
-      const response = await axios.post("http://localhost:2345/cart/add", {
+      const response = await axios.post("https://cara-backend-hryb.onrender.com/cart/add", {
         userId,
         productId,
         quantity: 1,

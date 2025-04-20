@@ -1,18 +1,17 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Typography } from "@mui/material";
-import { AuthContext } from "../api/AuthContext"; 
+import { toast } from "react-toastify";
+import { AuthContext } from "../api/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext); 
+  const { setUser } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  const [msg, setMsg] = useState("");
 
   const inputChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +24,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:2345/userlogin";
+    const url = "https://cara-backend-hryb.onrender.com/userlogin";
     const requestData = {
       email: formData.email,
       password: formData.password,
@@ -42,30 +41,47 @@ function Login() {
       console.log(query);
 
       if (response.status === 200) {
-        setMsg("Login Success");
-      
-        const userObject = {
-          accesstoken: query.accesstoken,
-          refreshtoken: query.refreshtoken,
-          name: query.name,
-          _id: query._id,
-        };
-      
-        sessionStorage.setItem("user", JSON.stringify(userObject)); // ✅ Store whole user
-      
-        setUser({
-          name: query.name,
-          userId: query._id,
-          accesstoken: query.accesstoken,
-          refreshtoken: query.refreshtoken,
+        toast.success("Login Successful!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
         });
-        navigate("/");
+
+        setTimeout(() => {
+          const userObject = {
+            accesstoken: query.accesstoken,
+            refreshtoken: query.refreshtoken,
+            name: query.name,
+            _id: query._id,
+          };
+
+          sessionStorage.setItem("user", JSON.stringify(userObject));
+
+          setUser({
+            name: query.name,
+            userId: query._id,
+            accesstoken: query.accesstoken,
+            refreshtoken: query.refreshtoken,
+          });
+
+          navigate("/");
+        }, 2000);
       } else {
-        setMsg(query.message || "Something went wrong");
+        toast.error(query.message || "Something went wrong", {
+          position: "top-center",
+          autoClose: 3000,
+        });
       }
     } catch (error) {
       console.error("Login failed:", error);
-      setMsg("Login failed. Please try again.");
+      toast.error("Login failed. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -111,11 +127,6 @@ function Login() {
                 </Link>
               </p>
             </div>
-            {msg && (
-              <Typography className="text-center text-red-500 mt-4">
-                {msg}
-              </Typography>
-            )}
           </div>
         </div>
       </div>
