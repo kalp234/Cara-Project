@@ -1,22 +1,29 @@
 const PORT = 2345;
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
 const paymentRoutes = require("./routes/payment");
 
+
 const userModel = require("./models/userModel");
-require("dotenv").config();
+
 
 const cartRoutes = require("./routes/cart.routes");
-const mongourl2 = "mongodb://localhost:27017/caraDB";
+const mongourl=process.env.MONGO_URL;
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/payment", paymentRoutes);
 mongoose
-  .connect(mongourl2)
+  .connect(mongourl)
   .then(() => console.log("MongoDB Connected"))
+  
   .catch((err) => console.error("MongoDB Connection Error:", err));
+  mongoose.connection.once('open', () => {
+    console.log(`✅ Connected to MongoDB database: ${mongoose.connection.name}`);
+  });
 
 app.get("/", (req, res) => {
   res.send("Express app is running");

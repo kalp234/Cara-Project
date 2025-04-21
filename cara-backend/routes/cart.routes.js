@@ -11,21 +11,17 @@ router.post("/add", async (req, res) => {
 
   try {
     if (!userId || !productId || !quantity) {
-      return res
-        .status(400)
-        .json({
-          message: "Missing required fields: userId, productId, or quantity",
-        });
+      return res.status(400).json({
+        message: "Missing required fields: userId, productId, or quantity",
+      });
     }
+
     if (quantity <= 0 || isNaN(quantity)) {
-      return res
-        .status(400)
-        .json({ message: "Quantity must be a positive number" });
+      return res.status(400).json({ message: "Quantity must be a positive number" });
     }
 
     const user = await User.findById(userId);
     const product = await Product.findById(productId);
-    console.log(user, product);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -35,22 +31,30 @@ router.post("/add", async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    let cartItem = await Cart.findOne({ userId, productId });
+    let cart = await Cart.findOne({ userId });
 
-    if (cartItem) {
-      cartItem.quantity += quantity;
-      await cartItem.save();
-      return res.status(200).json({ message: "Cart item updated" });
+    if (!cart) {
+      cart = new Cart({ userId, items: [] });
     }
 
-    cartItem = new Cart({
-      userId,
-      productId,
-      quantity,
-    });
+    // Check if product already exists in the cart
+    const existingItemIndex = cart.items.findIndex(
+      item => item.productId.toString() === productId
+    );
 
-    await cartItem.save();
-
+    if (existingItemIndex !== -1) {
+      // Update quantity if product already in cart
+      cart.items[existingItemIndex].quantity += quantity;
+    } else {
+      // Push new product to cart
+      console.log("Before push:", cart.items);
+      cart.items.push({ productId, quantity });
+      console.log("After push:", cart.items);
+    }
+    console.log("Before saving cart:", JSON.stringify(cart, null, 2));
+    await cart.save();
+    console.log("Saved cart:", JSON.stringify(cart, null, 2));
+    
     res.status(200).json({ message: "Item added to cart" });
   } catch (error) {
     console.error("Error adding to cart:", error.message);
@@ -60,6 +64,7 @@ router.post("/add", async (req, res) => {
     });
   }
 });
+
 router.get("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
@@ -69,6 +74,7 @@ router.get("/:userId", async (req, res) => {
     }
 
     let cart = await Cart.findOne({ userId }).populate("items.productId");
+    console.log("Fetched and populated cart:", JSON.stringify(cart, null, 2));
 
     if (!cart) {
       cart = new Cart({
