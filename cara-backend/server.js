@@ -12,7 +12,6 @@ const userModel = require("./models/userModel");
 
 const cartRoutes = require("./routes/cart.routes");
 const mongourl=process.env.MONGO_URL;
-// const mongourl2 = "mongodb://localhost:27017/caraDB";
 const app = express();
 app.use(cors());
 app.use(express.json());
