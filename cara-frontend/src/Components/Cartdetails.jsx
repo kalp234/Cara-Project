@@ -13,7 +13,7 @@ const Cartdetails = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(`http://localhost:2345/cart/${userId}`);
+        const response = await axios.get(`https://cara-backend-hryb.onrender.com/cart/${userId}`);
         console.log("Fetched cart:", response.data);
         setCartItems(response.data.items);
       } catch (error) {
@@ -27,7 +27,7 @@ const Cartdetails = () => {
 
   const removeItem = async (productId) => {
     try {
-      await axios.post("http://localhost:2345/cart/remove", { userId, productId });
+      await axios.post("https://cara-backend-hryb.onrender.com/cart/remove", { userId, productId });
       setCartItems(prev => prev.filter(item => item.productId._id !== productId));
       toast.success("Item removed from cart");
     } catch (error) {
@@ -38,7 +38,7 @@ const Cartdetails = () => {
 
   const updateQuantity = async (productId, quantity) => {
     try {
-      await axios.post("http://localhost:2345/cart/update", {
+      await axios.post("https://cara-backend-hryb.onrender.com/cart/update", {
         userId,
         productId,
         quantity,

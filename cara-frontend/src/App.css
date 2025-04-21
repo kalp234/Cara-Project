@@ -488,6 +488,55 @@ footer .copyright {
   width: 100%;
   text-align: center;
 }
+.page-content {
+  background-color: #e3e6f3;
+  min-height: 84vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;   /* change to match left alignment */
+  text-align: left;
+  padding: 20px 80px;        /* match header's side padding */
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  width: 100%;
+}
+
+
+.page-content h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.legal-list {
+  text-align: left;
+  list-style-type: decimal;         /* Shows numbers */
+  list-style-position: outside;     /* Numbers outside the box */
+  font-size: 1rem;
+  line-height: 2;
+  padding-left: 20px;               /* Pushes list content to the right */
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+@media (max-width: 768px) {
+  
+    .page-content {
+      padding: 20px;
+    }
+  
+  
+  .page-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .page-content p {
+    font-size: 0.95rem;
+  }
+}
+
+
 #close {
   display: none;
 }

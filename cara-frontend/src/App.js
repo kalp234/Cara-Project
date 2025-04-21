@@ -14,6 +14,9 @@ import Contact from "./Pages/Contact.jsx";
 import Cart from "./Pages/Cart.jsx";
 import Blog from "./Pages/Blog.jsx";
 import Blog2 from "./Pages/Blog2.jsx";
+import DeliveryInfo from "./Pages/DeliveryInfo";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import Terms from "./Pages/Terms";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./api/AuthContext";
@@ -25,7 +28,7 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <div className="App">
-          <ToastContainer position="top-right" autoClose={2000} />
+          <ToastContainer position="top-right" autoClose={1500} />
           <Header />
           <ScrollToTop />
           <Routes>
@@ -39,6 +42,9 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+<Route path="/terms" element={<Terms />} />
+<Route path="/delivery" element={<DeliveryInfo />} />
             <Route
               path="/cart"
               element={
