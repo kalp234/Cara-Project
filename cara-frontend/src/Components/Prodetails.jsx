@@ -4,6 +4,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../api/CartContext";
 
 const Prodetails = () => {
   const location = useLocation();
@@ -23,6 +25,7 @@ const Prodetails = () => {
   const [mainPrice, setMainPrice] = useState(price);
   const [mainDescription, setMainDescription] = useState(description);
   const [quantity, setQuantity] = useState(1);
+  const { setCartItems } = useContext(CartContext);
 
   const handleAddToCart = async (productId) => {
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
@@ -34,21 +37,19 @@ const Prodetails = () => {
     }
 
     try {
-      console.log("Sending to /cart/add:", {
+      const addResponse = await axios.post("http://localhost:2345/cart/add", {
         userId,
         productId,
         quantity,
       });
-      const response = await axios.post("https://cara-backend-hryb.onrender.com/cart/add", {
 
-        userId,
-        productId,
-        quantity,
-
-      });
-
-      if (response.status === 200) {
+      if (addResponse.status === 200) {
         toast.success("Item added to cart!");
+
+        const cartResponse = await axios.get(
+          `http://localhost:2345/cart/${userId}`
+        );
+        setCartItems(cartResponse.data.items);
       }
     } catch (error) {
       toast.error("Failed to add to cart.");

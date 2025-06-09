@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../img/logo.png";
-import axios from 'axios'
+import axios from "axios";
 
 function Login() {
   const [signup, setSignup] = useState({
@@ -9,7 +9,6 @@ function Login() {
     password: "",
     email: "",
   });
-
 
   const [message, setMessage] = useState("");
   console.log("Message:", message);
@@ -23,7 +22,7 @@ function Login() {
     setErrors(validationErrors);
     setMessage("");
     if (Object.keys(validationErrors).length === 0) {
-      const url = "https://cara-backend-hryb.onrender.com/signup";
+      const url = "http://localhost:2345/signup";
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -43,11 +42,9 @@ function Login() {
       } else {
         setMessage("User Not Registered Successfully");
       }
-      
     }
   };
 
-  
   const validate = () => {
     const errors = {};
     if (!signup.name.trim()) {
@@ -77,7 +74,7 @@ function Login() {
   return (
     <div className="min-h-screen bg-[#e3e6f3] text-gray-900 flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-[#e3e6f3] shadow sm:rounded-lg flex justify-center flex-1">
-        <div className="w-4/5 h-[125vh] md:h-auto md:w-[50%] lg:w-[41.66666%] p-6 sm:p-12 bg-white mt-10 md:mt-4 mb-10">
+        <div className="w-4/5 h-[90vh] md:h-auto md:w-[50%] lg:w-[41.66666%] p-6 sm:p-12 bg-white mt-10 md:mt-4 mb-10">
           <div>
             <div
               className="center flex flex-col flex-shrink-0 items-center"

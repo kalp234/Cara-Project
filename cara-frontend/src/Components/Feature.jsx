@@ -1,17 +1,15 @@
-import React from 'react'
-import "../App.css"
-import f1 from "../img/features/f1.png"
-import f2 from "../img/features/f2.png"
-import f3 from "../img/features/f3.png"
-import f4 from "../img/features/f4.png"
-import f5 from "../img/features/f5.png"
-import f6 from "../img/features/f6.png"
-
+import React from "react";
+import "../App.css";
+import f1 from "../img/features/f1.png";
+import f2 from "../img/features/f2.png";
+import f3 from "../img/features/f3.png";
+import f4 from "../img/features/f4.png";
+import f5 from "../img/features/f5.png";
+import f6 from "../img/features/f6.png";
 
 const Feature = () => {
   return (
-    
-        <section id="feature" className="section-p1">
+    <section id="feature" className="section-p1">
       <div className="fe-box">
         <img src={f1} alt="" />
         <h6>Free Shipping</h6>
@@ -37,8 +35,7 @@ const Feature = () => {
         <h6>24/7 Support</h6>
       </div>
     </section>
-    
-  )
-}
+  );
+};
 
-export default Feature
+export default Feature;

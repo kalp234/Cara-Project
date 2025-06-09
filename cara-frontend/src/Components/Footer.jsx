@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "../App.css";
 import logo from "../img/logo.png";
 import app from "../img/pay/app.jpg";
@@ -13,12 +13,21 @@ const Footer = () => {
       <div className="col">
         <img className="logo" src={logo} alt="Cara Logo" />
         <h4>Contact</h4>
-        <p><strong>Address</strong>: Shop No.1, Ground Floor,<br />
-          Satya-2, Next to Bharat Petrol Pump,<br />
-          Opp. Ranna Park Bus Stop, Ghatlodia,<br />
-          Ahmedabad-380061</p>
-        <p><strong>Phone</strong>: (+91) 01234 56789</p>
-        <p><strong>Hours</strong>: 10:00 - 18:00, Mon - Sat</p>
+        <p>
+          <strong>Address</strong>: Shop No.1, Ground Floor,
+          <br />
+          Satya-2, Next to Bharat Petrol Pump,
+          <br />
+          Opp. Ranna Park Bus Stop, Ghatlodia,
+          <br />
+          Ahmedabad-380061
+        </p>
+        <p>
+          <strong>Phone</strong>: (+91) 01234 56789
+        </p>
+        <p>
+          <strong>Hours</strong>: 10:00 - 18:00, Mon - Sat
+        </p>
         <div className="follow">
           <h4>Follow Us</h4>
           <div className="icon">

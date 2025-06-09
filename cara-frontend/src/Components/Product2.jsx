@@ -8,7 +8,7 @@ const products = [
   {
     id: "67f920a52c502a46a4ce0d14",
     image:
-      "https://res.cloudinary.com/demqwkfpy/image/upload/v1744376263/n2_k9q6jg.jpg",
+      "https://res.cloudinary.com/demqwkfpy/image/upload/v1744376263/n1_o34shs.jpg",
     name: "Light Blue Linen Shirt (women)",
     price: 499.0,
     brand: "Adidas",
@@ -34,7 +34,8 @@ const products = [
           "Timeless checks in soft cotton. Ideal for casual outings and brunch dates. Pairs beautifully with jeans or skirts.",
       },
       {
-        image:   "https://res.cloudinary.com/demqwkfpy/image/upload/v1744376296/n3_sg38wa.jpg",
+        image:
+          "https://res.cloudinary.com/demqwkfpy/image/upload/v1744376296/n3_sg38wa.jpg",
         name: "Classic White Shirt (women)",
         brand: "Nike",
         price: 399.0,
@@ -396,11 +397,14 @@ const userId = user?._id; // actual MongoDB ObjectId
 const Product2 = () => {
   const handleAddToCart = async (productId) => {
     try {
-      const response = await axios.post("https://cara-backend-hryb.onrender.com/cart/add", {
-        userId,
-        productId,
-        quantity: 1,
-      });
+      const response = await axios.post(
+        "https://cara-backend-hryb.onrender.com/cart/add",
+        {
+          userId,
+          productId,
+          quantity: 1,
+        }
+      );
 
       if (response.status === 200) {
         toast.success("Item added to cart!");

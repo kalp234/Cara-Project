@@ -43,8 +43,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
-<Route path="/terms" element={<Terms />} />
-<Route path="/delivery" element={<DeliveryInfo />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/delivery" element={<DeliveryInfo />} />
             <Route
               path="/cart"
               element={

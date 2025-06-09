@@ -300,8 +300,12 @@ body {
   padding: 10px 0;
 }
 #banner h2 span {
+  font-weight: 600;
   color: red;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
 }
+
 #banner button:hover {
   background-color: #088178;
   color: white;
@@ -494,14 +498,13 @@ footer .copyright {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;   /* change to match left alignment */
+  align-items: center; /* change to match left alignment */
   text-align: left;
-  padding: 20px 80px;        /* match header's side padding */
-  font-family: 'Arial', sans-serif;
+  padding: 20px 80px; /* match header's side padding */
+  font-family: "Arial", sans-serif;
   color: #333;
   width: 100%;
 }
-
 
 .page-content h1 {
   font-size: 2rem;
@@ -510,23 +513,21 @@ footer .copyright {
 }
 .legal-list {
   text-align: left;
-  list-style-type: decimal;         /* Shows numbers */
-  list-style-position: outside;     /* Numbers outside the box */
+  list-style-type: decimal; /* Shows numbers */
+  list-style-position: outside; /* Numbers outside the box */
   font-size: 1rem;
   line-height: 2;
-  padding-left: 20px;               /* Pushes list content to the right */
+  padding-left: 20px; /* Pushes list content to the right */
   margin: 0 auto;
   width: 100%;
   max-width: 800px;
 }
 
 @media (max-width: 768px) {
-  
-    .page-content {
-      padding: 20px;
-    }
-  
-  
+  .page-content {
+    padding: 20px;
+  }
+
   .page-content h1 {
     font-size: 1.5rem;
   }
@@ -535,7 +536,6 @@ footer .copyright {
     font-size: 0.95rem;
   }
 }
-
 
 #close {
   display: none;
@@ -714,9 +714,9 @@ footer .copyright {
 #about-app h1 {
   text-align: center;
 }
-#about-app span{
+#about-app span {
   color: blue;
-font-weight: 500;
+  font-weight: 500;
 }
 #about-app video {
   width: 100%;
@@ -951,7 +951,7 @@ font-weight: 500;
   #navbar li {
     margin-bottom: 25px;
   }
- 
+
   #mobile {
     display: flex;
     align-items: center;
@@ -961,18 +961,20 @@ font-weight: 500;
     font-size: 24px;
     padding-left: 20px;
   }
-  @media (max-width: 1024px) { /* Adjust breakpoint as needed */
+  @media (max-width: 1024px) {
+    /* Adjust breakpoint as needed */
     .desktop-user-info {
       display: none !important;
     }
   }
-  
-  @media (min-width: 1025px) { /* Desktop only */
+
+  @media (min-width: 1025px) {
+    /* Desktop only */
     .mobile-user-info {
       display: none !important;
     }
   }
-  
+
   #close {
     display: initial;
     position: absolute;
@@ -1004,9 +1006,9 @@ font-weight: 500;
   #banner {
     height: 40vh;
   }
-  #banner .normal{
+  #banner .normal {
     background-color: #088178;
-  color: white;
+    color: white;
   }
   #sm-banner .banner-box {
     min-width: 50%;
@@ -1072,9 +1074,9 @@ font-weight: 500;
   #banner {
     height: 40vh;
   }
-  #banner .normal{
+  #banner .normal {
     background-color: #088178;
-  color: white;
+    color: white;
   }
   #sm-banner .banner-box {
     height: 40vh;

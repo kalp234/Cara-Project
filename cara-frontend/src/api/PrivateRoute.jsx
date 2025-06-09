@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const PrivateRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
   const location = useLocation();
-  const hasShownToast = useRef(false); // ⬅️ this tracks whether toast is already shown
+  const hasShownToast = useRef(false); 
 
   if (!user) {
     if (!hasShownToast.current) {
