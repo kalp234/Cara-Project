@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Prodetails from '../Components/Prodetails';
-// import Product1 from '../Components/Product1';
+import Product1 from '../Components/Product1';
 import Newsletter from '../Components/Newsletter';
 import Footer from '../Components/Footer';
 import f1 from "../img/products/f1.jpg";
@@ -23,7 +23,7 @@ const Sproduct = () => {
   return (
     <div>
       <Prodetails name={product.name} price={product.price} image={product.image} gallery={product.gallery} />
-      {/* <Product1 /> */}
+      <Product1 />
       <Newsletter />
       <Footer />
     </div>
