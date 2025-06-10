@@ -37,7 +37,7 @@ const Prodetails = () => {
     }
 
     try {
-      const addResponse = await axios.post("http://localhost:2345/cart/add", {
+      const addResponse = await axios.post("https://cara-project.onrender.com/cart/add", {
         userId,
         productId,
         quantity,
@@ -47,7 +47,7 @@ const Prodetails = () => {
         toast.success("Item added to cart!");
 
         const cartResponse = await axios.get(
-          `http://localhost:2345/cart/${userId}`
+          `https://cara-project.onrender.com/cart/${userId}`
         );
         setCartItems(cartResponse.data.items);
       }

@@ -14,7 +14,7 @@ const Cartdetails = () => {
     const fetchCartItems = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:2345/cart/${userId}`
+          `https://cara-project.onrender.com/cart/${userId}`
         );
         console.log("Fetched cart:", response.data);
         setCartItems(response.data.items);
@@ -29,7 +29,7 @@ const Cartdetails = () => {
 
   const removeItem = async (productId) => {
     try {
-      await axios.post("http://localhost:2345/cart/remove", {
+      await axios.post("https://cara-project.onrender.com/cart/remove", {
         userId,
         productId,
       });
@@ -45,7 +45,7 @@ const Cartdetails = () => {
 
   const updateQuantity = async (productId, quantity) => {
     try {
-      await axios.post("http://localhost:2345/cart/update", {
+      await axios.post("https://cara-project.onrender.com/cart/update", {
         userId,
         productId,
         quantity,

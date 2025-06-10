@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:2345/cart";
+const API_URL = "https://cara-project.onrender.com/cart";
 
 export const addToCart = async (userId, productId, quantity) => {
   try {

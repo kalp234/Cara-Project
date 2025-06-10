@@ -22,7 +22,7 @@ function Login() {
     setErrors(validationErrors);
     setMessage("");
     if (Object.keys(validationErrors).length === 0) {
-      const url = "http://localhost:2345/signup";
+      const url = "https://cara-project.onrender.com/signup";
       const response = await fetch(url, {
         method: "POST",
         headers: {
