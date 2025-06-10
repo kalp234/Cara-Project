@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -9,8 +9,8 @@ const Banner = () => {
         Up to <span>70% Off</span> - All T-Shirts & Accessories
       </h2>
       <Link to="/shop">
-  <button className="normal">Explore More</button>
-</Link>
+        <button className="normal">Explore More</button>
+      </Link>
     </section>
   );
 };

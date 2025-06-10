@@ -1,9 +1,8 @@
-import React from 'react'
-import '../App.css'
+import React from "react";
+import "../App.css";
 const Banner3 = () => {
   return (
-    
-        <section id="banner3">
+    <section id="banner3">
       <div className="banner-box">
         <h2>SEASONAL SALE</h2>
         <h3>Winter Collection - 50% Off</h3>
@@ -17,8 +16,7 @@ const Banner3 = () => {
         <h3>New Trendy Prints</h3>
       </div>
     </section>
-    
-  )
-}
+  );
+};
 
-export default Banner3
+export default Banner3;

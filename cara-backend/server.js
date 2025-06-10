@@ -6,12 +6,10 @@ const cors = require("cors");
 
 const paymentRoutes = require("./routes/payment");
 
-
 const userModel = require("./models/userModel");
 
-
 const cartRoutes = require("./routes/cart.routes");
-const mongourl=process.env.MONGO_URL;
+const mongourl = process.env.MONGO_URL;
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -19,11 +17,11 @@ app.use("/api/payment", paymentRoutes);
 mongoose
   .connect(mongourl)
   .then(() => console.log("MongoDB Connected"))
-  
+
   .catch((err) => console.error("MongoDB Connection Error:", err));
-  mongoose.connection.once('open', () => {
-    console.log(`✅ Connected to MongoDB database: ${mongoose.connection.name}`);
-  });
+mongoose.connection.once("open", () => {
+  console.log(`✅ Connected to MongoDB database: ${mongoose.connection.name}`);
+});
 
 app.get("/", (req, res) => {
   res.send("Express app is running");
@@ -46,7 +44,7 @@ app.post("/signup", async (req, res) => {
     res.status(200).json({ message: "User Registered Successfully" });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error occured" });
   }
 });
 

@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Cart = require("../models/cart.model"); 
-const User = require("../models/userModel"); 
-const Product = require("../models/productModel"); 
+const Cart = require("../models/cart.model");
+const User = require("../models/userModel");
+const Product = require("../models/productModel");
 const mongoose = require("mongoose");
-
 
 router.post("/add", async (req, res) => {
   const { userId, productId, quantity } = req.body;
@@ -17,7 +16,9 @@ router.post("/add", async (req, res) => {
     }
 
     if (quantity <= 0 || isNaN(quantity)) {
-      return res.status(400).json({ message: "Quantity must be a positive number" });
+      return res
+        .status(400)
+        .json({ message: "Quantity must be a positive number" });
     }
 
     const user = await User.findById(userId);
@@ -37,16 +38,13 @@ router.post("/add", async (req, res) => {
       cart = new Cart({ userId, items: [] });
     }
 
-    // Check if product already exists in the cart
     const existingItemIndex = cart.items.findIndex(
-      item => item.productId.toString() === productId
+      (item) => item.productId.toString() === productId
     );
 
     if (existingItemIndex !== -1) {
-      // Update quantity if product already in cart
       cart.items[existingItemIndex].quantity += quantity;
     } else {
-      // Push new product to cart
       console.log("Before push:", cart.items);
       cart.items.push({ productId, quantity });
       console.log("After push:", cart.items);
@@ -54,7 +52,7 @@ router.post("/add", async (req, res) => {
     console.log("Before saving cart:", JSON.stringify(cart, null, 2));
     await cart.save();
     console.log("Saved cart:", JSON.stringify(cart, null, 2));
-    
+
     res.status(200).json({ message: "Item added to cart" });
   } catch (error) {
     console.error("Error adding to cart:", error.message);
@@ -94,7 +92,6 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-// POST: Remove item from cart
 router.post("/remove", async (req, res) => {
   const { userId, productId } = req.body;
 
@@ -119,7 +116,6 @@ router.post("/remove", async (req, res) => {
   }
 });
 
-// POST: Update item quantity in cart
 router.post("/update", async (req, res) => {
   const { userId, productId, quantity } = req.body;
 

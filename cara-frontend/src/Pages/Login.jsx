@@ -24,7 +24,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = "https://cara-backend-hryb.onrender.com/userlogin";
+    const url = "http://localhost:2345/userlogin";
     const requestData = {
       email: formData.email,
       password: formData.password,
@@ -88,7 +88,7 @@ function Login() {
   return (
     <div className="min-h-screen bg-[#e3e6f3] text-gray-900 flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-[#e3e6f3] flex justify-center flex-1">
-        <div className="w-4/5 h-[85vh] md:h-auto md:w-[50%] lg:w-[41.66666%] p-12 pt-18 lg:p-16 bg-white mt-10 md:mt-3">
+        <div className="w-4/5 h-[60vh] md:h-auto md:w-[50%] lg:w-[41.66666%] p-12 pt-18 lg:p-16 bg-white mt-10 md:mt-3">
           <div className="text-center mb-8">
             <Typography variant="h4">Login</Typography>
           </div>

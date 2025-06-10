@@ -12,25 +12,27 @@ const Cartadd = () => {
   const handleCheckout = () => {
     const options = {
       key: "rzp_test_z7oGYiesyg5x3b",
-      amount: grandTotal * 100, 
+      amount: grandTotal * 100,
       currency: "INR",
       name: "Cara Fashion",
       description: "Purchase from Cara",
       image: "/logo.png",
       handler: function (response) {
-        alert(`✅ Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`);
+        alert(
+          `✅ Payment Successful!\nPayment ID: ${response.razorpay_payment_id}`
+        );
       },
       prefill: {
         name: "Kalp Shah",
         email: "example@gmail.com",
-        contact: "9999999999"
+        contact: "9999999999",
       },
       notes: {
-        address: "Cara Fashion Online"
+        address: "Cara Fashion Online",
       },
       theme: {
-        color: "#3399cc"
-      }
+        color: "#3399cc",
+      },
     };
 
     const rzp = new window.Razorpay(options);
@@ -56,7 +58,9 @@ const Cartadd = () => {
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
           />
-          <button className="normal" onClick={handleApplyCoupon}>Apply</button>
+          <button className="normal" onClick={handleApplyCoupon}>
+            Apply
+          </button>
         </div>
         <p className="text-sm mt-4 text-gray-600">
           Use code <strong>FREEDEL</strong> for free delivery on all orders.
@@ -83,14 +87,18 @@ const Cartadd = () => {
                   <>₹50.00</>
                 ) : (
                   <>
-                    <span className="line-through text-gray-500 mr-2">₹50.00</span>
+                    <span className="line-through text-gray-500 mr-2">
+                      ₹50.00
+                    </span>
                     <span className="text-green-600 font-semibold">Free</span>
                   </>
                 )}
               </td>
             </tr>
             <tr>
-              <td><strong>Total</strong></td>
+              <td>
+                <strong>Total</strong>
+              </td>
               <td>
                 {!couponApplied ? (
                   <strong>₹{(total + 50).toFixed(2)}</strong>
@@ -99,7 +107,9 @@ const Cartadd = () => {
                     <span className="line-through text-gray-500 mr-2">
                       ₹{(total + 50).toFixed(2)}
                     </span>
-                    <strong className="text-green-600">₹{total.toFixed(2)}</strong>
+                    <strong className="text-green-600">
+                      ₹{total.toFixed(2)}
+                    </strong>
                   </>
                 )}
               </td>
