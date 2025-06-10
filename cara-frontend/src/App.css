@@ -1,7 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 * {
   margin: 0;
@@ -494,7 +492,7 @@ footer .copyright {
 }
 .page-content {
   background-color: #e3e6f3;
-  min-height: 84vh;
+  min-height: 86vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

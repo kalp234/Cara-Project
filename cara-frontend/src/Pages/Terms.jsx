@@ -1,6 +1,6 @@
 import React from 'react';
 import "../App.css";
-
+import "@fortawesome/fontawesome-free/css/all.min.css";
 const Terms = () => {
   return (
     <div className="page-content">
@@ -15,6 +15,21 @@ const Terms = () => {
       <li> You must not use our site for any illegal or unauthorized purpose.</li>
       <li> We reserve the right to modify these terms at any time without notice.</li>
       </ol>
+      <button
+      onClick={() => (window.location.href = '/')}
+      style={{
+        marginTop: '20px',
+        padding: '10px 20px',
+        backgroundColor: '#088178',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer'
+      }}
+    >
+       <i className="fa-solid fa-arrow-left " style={{ marginRight: '5px',fontSize: '14px' }}></i>
+      Go Back
+    </button>
     </div>
   );
 };

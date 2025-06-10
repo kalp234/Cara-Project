@@ -1,5 +1,6 @@
 import React from 'react';
 import "../App.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const PrivacyPolicy = () => {
   return (
@@ -15,6 +16,21 @@ const PrivacyPolicy = () => {
       <li> We follow industry-standard security practices to protect your information.</li>
       <li>By using our website, you agree to the terms outlined in this privacy policy.</li>
       </ol>
+      <button
+      onClick={() => (window.location.href = '/')}
+      style={{
+        marginTop: '20px',
+        padding: '10px 20px',
+        backgroundColor: '#088178',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer'
+      }}
+    >
+       <i className="fa-solid fa-arrow-left " style={{ marginRight: '5px',fontSize: '14px' }}></i>
+      Go Back
+    </button>
     </div>
   );
 };
