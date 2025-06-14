@@ -38,7 +38,7 @@ function Login() {
         setMessage("User Registered Successfully. Please Login to continue.");
       } else if (response.status === 409) {
         setMessage("Email is already registered.");
-        setErrors({ email: "Email is already registered" });
+        // setErrors({ email: "Email is already registered" });
       } else {
         setMessage("User Not Registered Successfully");
       }
@@ -74,7 +74,7 @@ function Login() {
   return (
     <div className="min-h-screen bg-[#e3e6f3] text-gray-900 flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-[#e3e6f3] shadow sm:rounded-lg flex justify-center flex-1">
-        <div className="w-4/5 h-[90vh] md:h-auto md:w-[50%] lg:w-[41.66666%] p-6 sm:p-12 bg-white mt-10 md:mt-4 mb-10">
+        <div className="w-4/5 h-[92vh] md:h-auto md:w-[50%] lg:w-[41.66666%] p-6 sm:p-12 bg-white mt-10 md:mt-4 mb-10">
           <div>
             <div
               className="center flex flex-col flex-shrink-0 items-center"
@@ -99,7 +99,7 @@ function Login() {
               </p>
             </div>
           </div>
-          <div className="mt-2 flex flex-col items-center mt-[-2.75rem]">
+          <div className=" flex flex-col items-center mt-[-2.75rem]">
             <div className="w-full flex-1 mt-1">
               <div className="my-12 border-b-2  text-center">
                 <div className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
@@ -162,10 +162,15 @@ function Login() {
                 </p>
               </div>
               {message && (
-                <p className="mt-2 text-center text-sm text-red-600">
-                  {message}
-                </p>
-              )}
+  <p
+    className={`mt-2 animate-bounce text-center text-sm ${
+      message.includes("Successfully") ? "text-green-600" : "text-red-600"
+    }`}
+  >
+    {message}
+  </p>
+)}
+
             </div>
           </div>
         </div>
