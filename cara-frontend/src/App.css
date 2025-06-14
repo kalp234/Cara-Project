@@ -1035,7 +1035,11 @@ footer .copyright {
 }
 
 /* mobile device */
-
+@media (max-width: 768px) {
+  .Toastify__toast-container--top-center {
+    top: 60px !important; /* adjust as needed */
+  }
+}
 @media (max-width: 477px) {
   .section-p1 {
     padding: 20px;

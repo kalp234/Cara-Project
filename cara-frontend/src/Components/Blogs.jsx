@@ -11,7 +11,7 @@ const Blog = () => {
   return (
     <section id="blog">
       <div className="blog-box">
-        <div className="blog-img border border-2">
+        <div className="blog-img border-2">
           <img src={b1} alt="" />
         </div>
         <div className="blog-details">
@@ -22,13 +22,13 @@ const Blog = () => {
             1.9M followers.
           </p>
 
-          <a href="https://www.the-atlantic-pacific.com/">CONTINUE READING</a>
+          <a href="https://www.the-atlantic-pacific.com/" className="btn">CONTINUE READING</a>
         </div>
         <h1>10/04</h1>
       </div>
 
       <div className="blog-box">
-        <div className="blog-img border border-2">
+        <div className="blog-img  border-2">
           <img src={b2} alt="" />
         </div>
         <div className="blog-details">
@@ -45,7 +45,7 @@ const Blog = () => {
       </div>
 
       <div className="blog-box">
-        <div className="blog-img border border-2">
+        <div className="blog-img border-2">
           <img src={b3} alt="" />
         </div>
         <div className="blog-details">
@@ -60,7 +60,7 @@ const Blog = () => {
       </div>
 
       <div className="blog-box">
-        <div className="blog-img border border-2">
+        <div className="blog-img  border-2">
           <img src={b4} alt="" />
         </div>
         <div className="blog-details">

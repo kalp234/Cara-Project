@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { toast } from "react-toastify";
 import { AuthContext } from "../api/AuthContext";
+import "../App.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ function Login() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const inputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -21,8 +24,14 @@ function Login() {
     }));
   };
 
+  // Responsive toast position
+  const getToastPosition = () => {
+    return window.innerWidth <= 768 ? "bottom-center" : "top-center";
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const url = "https://cara-project.onrender.com/userlogin";
     const requestData = {
@@ -38,9 +47,13 @@ function Login() {
       });
 
       const query = await response.json();
+      console.log("Response status:", response.status);
+console.log("Query object:", query);
+
       console.log(query);
 
-      if (response.status === 200) {
+      if (response.ok && query.accesstoken) {
+
         toast.success("Login Successful!", {
           position: "top-center",
           autoClose: 2000,
@@ -48,7 +61,6 @@ function Login() {
           closeOnClick: true,
           pauseOnHover: false,
           draggable: false,
-          progress: undefined,
         });
 
         setTimeout(() => {
@@ -82,6 +94,8 @@ function Login() {
         position: "top-center",
         autoClose: 3000,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -113,10 +127,15 @@ function Login() {
                 required
               />
               <button
-                className="w-full py-2 bg-indigo-500 text-white rounded hover:bg-indigo-700"
+                className={`w-full py-2 text-white rounded ${
+                  loading
+                    ? "bg-indigo-300"
+                    : "bg-indigo-500 hover:bg-indigo-700"
+                }`}
                 type="submit"
+                disabled={loading}
               >
-                Login
+                {loading ? "Logging in..." : "Login"}
               </button>
             </form>
             <div className="mt-4 text-center">
