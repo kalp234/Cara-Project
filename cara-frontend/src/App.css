@@ -129,6 +129,7 @@ body {
   bottom: -4px;
   left: 20px;
 }
+
 #mobile {
   display: none;
   align-items: center;
@@ -954,6 +955,7 @@ footer .copyright {
     display: flex;
     align-items: center;
   }
+
   #mobile i {
     color: #1a1a1a;
     font-size: 24px;
@@ -1039,6 +1041,9 @@ footer .copyright {
   }
   #header {
     padding: 10px 30px;
+  }
+  #navbar.active ~ #mobile {
+    display: none !important;
   }
   #hero {
     padding: 0 0;

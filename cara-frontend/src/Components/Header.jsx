@@ -51,7 +51,7 @@ const Header = () => {
       <a href="#">
         <img src={logo} className="logo" alt="Logo" />
       </a>
-      <div>
+      
         <ul id="navbar">
           <li>
             <NavLink
@@ -144,7 +144,7 @@ const Header = () => {
             <i className="fa-solid fa-xmark"></i>
           </a>
         </ul>
-      </div>
+      
 
       <div id="mobile">
         <NavLink to="/cart" className="relative">
