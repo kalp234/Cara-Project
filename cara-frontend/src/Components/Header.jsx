@@ -9,7 +9,7 @@ import "../App.css";
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext);
-  const { cartItems } = useContext(CartContext);
+  const { cartItems,clearCart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const closeNav = () => {
@@ -52,6 +52,7 @@ const Header = () => {
 
   return (
     <section id="header" className="md:mr-[-50px]">
+      <div className="container">
       <a href="#">
         <img src={logo} className="logo" alt="Logo" />
       </a>
@@ -99,6 +100,7 @@ const Header = () => {
             <button
               onClick={() => {
                 logout();
+                clearCart();
                 closeNav();
               }}
               className="bg-[#088178] text-white px-3 py-1 md:ml-14 rounded w-24"
@@ -139,6 +141,7 @@ const Header = () => {
             <button
               onClick={() => {
                 logout();
+                clearCart();
                 closeNav();
               }}
               className="bg-[#088178] text-white px-3 py-1 mt-1 rounded"
@@ -155,7 +158,7 @@ const Header = () => {
           </div>
         )}
       </div>
-    </section>
+      </div></section>
   );
 };
 

@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
 import { useNavigate, Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { toast } from "react-toastify";
@@ -26,7 +27,7 @@ function Login() {
 
   // Responsive toast position
   const getToastPosition = () => {
-    return window.innerWidth <= 768 ? "bottom-center" : "top-center";
+    return window.innerWidth <= 768 ? "top-center" : "top-center";
   };
 
   const handleSubmit = async (e) => {
@@ -48,12 +49,11 @@ function Login() {
 
       const query = await response.json();
       console.log("Response status:", response.status);
-console.log("Query object:", query);
+      console.log("Query object:", query);
 
       console.log(query);
 
       if (response.ok && query.accesstoken) {
-
         toast.success("Login Successful!", {
           position: "top-center",
           autoClose: 2000,
@@ -98,6 +98,23 @@ console.log("Query object:", query);
       setLoading(false);
     }
   };
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.showLoginToast) {
+      toast.error("Please log in to continue", {
+        // changed to error for red color
+        position: getToastPosition(),
+        autoClose: 3000,
+        pauseOnHover: false,
+        closeOnClick: true,
+        draggable: false,
+      });
+
+      // Clear state so toast only shows once if user refreshes or navigates away and back
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   return (
     <div className="min-h-screen bg-[#e3e6f3] text-gray-900 flex justify-center">

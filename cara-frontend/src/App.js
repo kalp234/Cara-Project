@@ -17,6 +17,7 @@ import Blog2 from "./Pages/Blog2.jsx";
 import DeliveryInfo from "./Pages/DeliveryInfo";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Terms from "./Pages/Terms";
+import OrderSuccess from "./Components/Ordersuccess";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./api/AuthContext";
@@ -42,6 +43,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/delivery" element={<DeliveryInfo />} />

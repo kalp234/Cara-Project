@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // 👈 Add loading state
 
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
         refreshtoken: parsedUser.refreshtoken,
       });
     }
+    setLoading(false); // 👈 Set loading false after session check
   }, []);
 
   const logout = () => {
@@ -24,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ user, setUser, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

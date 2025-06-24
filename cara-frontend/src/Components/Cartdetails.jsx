@@ -77,7 +77,7 @@ const Cartdetails = () => {
   }
 
   return (
-    <section id="cart" className="section-p1">
+    <section id="cart" className="section-p1 bg-[#e3e6f3]">
       <h2 className="text-xl font-bold mb-4">Your Cart</h2>
       <table width="100%">
         <thead>
@@ -92,7 +92,7 @@ const Cartdetails = () => {
         </thead>
         <tbody>
           {cartItems.map((item) => (
-            <tr key={item.productId._id}>
+            <tr key={item.productId._id} className="border-b border-gray-400">
               <td>
                 <button onClick={() => removeItem(item.productId._id)}>
                   <i className="far fa-times-circle text-red-500"></i>
@@ -115,7 +115,7 @@ const Cartdetails = () => {
                   onChange={(e) =>
                     updateQuantity(item.productId._id, e.target.value)
                   }
-                  className="w-16 px-2 py-1 border rounded"
+                  className="w-16 px-2 py-1 border-2 border-gray-400 rounded"
                 />
               </td>
               <td>₹{(item.productId.price * item.quantity).toFixed(2)}</td>
